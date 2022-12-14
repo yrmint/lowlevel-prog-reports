@@ -19,6 +19,7 @@ main:
   la     a0, array
   lw     a1, array_length
   call   max
+  mv     a2, a0
   
   li     a0, 4             # a0 = 4 ecall code to print string
   la     a1, string        # a1 = index of string
@@ -67,4 +68,5 @@ skip:
   bne    a0, a7, loop      # if( array_ptr != end_ptr ) goto loop
  
 exit:
+  mv     a0, a2
   ret
