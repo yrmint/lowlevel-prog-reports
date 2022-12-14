@@ -4,6 +4,7 @@ __start:
 .globl __start
   call   main
 finish:
+  mv     a1, a0            # a1 = a0
   li     a0, 17            # a0 = 17
   ecall                    # выход с кодом завершения
   
@@ -17,7 +18,6 @@ main:
   
   la     a0, array
   lw     a1, array_length
-  lw     a2, 0(a0)
   call   max
   
   li     a0, 4             # a0 = 4 ecall code to print string
@@ -50,12 +50,11 @@ max:
 .globl max
   # в a0 – адрес 0-го элемента массива чисел типа unsigned
   # в a1 – длина массива
-  # в a2 - максимальный элеммент (сначала - первый)
   
   srli   a7, a1, 1         # count
   slli   a7, a7, 3         # a7 = count << 3 = (count * 2) * 4
   add    a7, a0, a7        # end_ptr
-  
+  lw     a2, 0(a0)         # a2 - максимальный элеммент (сначала - первый)
   beq    a0, a7, exit      # if( array_ptr == end_ptr ) goto exit
   
 loop:
