@@ -10,19 +10,19 @@
 .text
 __start:
 .globl __start
-  lw     a3, array_length  # a2 = <длина массива> 
+  lw     a3, array_length  # a3 = <длина массива> 
   la     a4, array         # установка регистра a3 в значение адреса, соответствующего метке array
-  li     a7, 0             # a6 = 0 
-  lw     a6, 0(a4)         # a5 - текущий результат (сначала - первый элемент массива)
+  li     a7, 0             # a7 = 0 
+  lw     a6, 0(a4)         # a6 - текущий результат (сначала - первый элемент массива)
  
 loop:
   bgeu   a7, a3, exit      # if (a6 >= a2) goto exit
-  slli   a5, a7, 2         # a4 = a6 << 2 = a6 * 4
-  add    a5, a4, a5        # a4 = a3 + a4 = a3 + a6 * 4 = i
+  slli   a5, a7, 2         # a5 = a7 << 2 = a7 * 4
+  add    a5, a4, a5        # a5 = a4 + a5 = a4 + a7 * 4 = i
   lw     t0, 0(a5)         # t0 = array[i]
   addi   a7, a7, 1         # i += 1
-  bgeu   a6, t0, skip      # if (a5 >= t0) goto skip
-  mv     a6, t0            # a5 = t0
+  bgeu   a6, t0, skip      # if (a6 >= t0) goto skip
+  mv     a6, t0            # a6 = t0
   
 skip:
 
@@ -37,7 +37,7 @@ finish:
   ecall                    # print string
 
   li     a0, 24            # a0 = 24 ecall code to print int
-  mv     a1, a6            # a1 = a5
+  mv     a1, a6            # a1 = a6
   ecall                    # print int from a1
  
   li     a0, 10            # a0 = 10 
