@@ -16,7 +16,7 @@ __start:
   lw     a6, 0(a4)         # a6 - текущий результат (сначала - первый элемент массива)
  
 loop:
-  bgeu   a7, a3, exit      # if (a6 >= a2) goto exit
+  bgeu   a7, a3, exit      # if (a7 >= a3) goto exit
   slli   a5, a7, 2         # a5 = a7 << 2 = a7 * 4
   add    a5, a4, a5        # a5 = a4 + a5 = a4 + a7 * 4 = i
   lw     t0, 0(a5)         # t0 = array[i]

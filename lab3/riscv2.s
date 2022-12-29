@@ -25,7 +25,7 @@ main:
   la     a1, string        # a1 = index of string
   ecall                    # print string
 
-  li     a0, 24            # a0 = 24 ecall code to print int
+  li     a0, 23            # a0 = 24 ecall code to print int
   mv     a1, a2            # a1 = a2
   ecall                    # print int from a1
   
@@ -37,9 +37,9 @@ main:
   
 .rodata
 array_length:
-  .word 10
+  .word 11
 array:
-  .word 4, 60, 15, 10, 25, 100, 413, 0, 9, 12
+  .word 4, 60, 15, 10, 25, 100, 413, 0, 9, 512, 513
 string:
   .ascii "Max value: "
   .word 0
@@ -52,10 +52,9 @@ max:
   # в a0 – адрес 0-го элемента массива чисел типа unsigned
   # в a1 – длина массива
   
-  srli   a7, a1, 1         # count
-  slli   a7, a7, 3         # a7 = count << 3 = (count * 2) * 4
+  slli   a7, a1, 2         # a7 = a1 * 4
   add    a7, a0, a7        # end_ptr
-  lw     a2, 0(a0)         # a2 - максимальный элеммент (сначала - первый)
+  lw     a2, 0(a0)         # a2 - максимальный элемент (сначала - первый)
   beq    a0, a7, exit      # if( array_ptr == end_ptr ) goto exit
   
 loop:
